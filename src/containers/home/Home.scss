@@ -1,0 +1,33 @@
+.contenedor-login{
+    background-color: gray;
+    height: 80vh;
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+
+    
+    .imgHome{
+        align-self: flex-end;
+        margin-bottom: 1em;
+        .title{
+            margin-bottom: 2.5em;
+            color: antiquewhite;
+            font-size: 1.4em;
+
+        }
+        
+    }
+    .imgAdolescentes{
+        border-radius: 5px 5px;
+     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;;
+    }
+
+    .login{
+        align-self: flex-start;
+        border-radius: 10px 10px ;
+        margin-top: 1em;
+        padding: 2em;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;;
+
+    }
+}
