@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Events() {
+export default function Diary() {
   return (
     <div>
-        <h1>EVENTS</h1>
+        <h1>DIARY</h1>
     </div>
   )
 }
