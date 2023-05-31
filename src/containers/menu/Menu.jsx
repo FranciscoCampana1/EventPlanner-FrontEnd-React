@@ -9,25 +9,27 @@ export default function Menu() {
           <h2>Contactos</h2>
         </div>
         <div>
-          <img
-            src="../../../img/Sin título.png"
-            alt="ir a contactos"
-            className="imagen-contactos"
-          />
+          <a href="/diary">
+            <img
+              src="../../../img/Sin título.png"
+              alt="ir a contactos"
+              className="imagen-contactos"
+            />
+          </a>
         </div>
       </div>
       <div className="contenedor">
         <div>
-            <h2>
-                Crear Evento
-            </h2>
+          <h2>Crear Evento</h2>
         </div>
         <div>
-          <img
-            src="../../../img/crear evento2.png"
-            alt="imagen crear evento"
-            className="imagen-evento"
-          />
+          <a href="/event-create">
+            <img
+              src="../../../img/crear evento2.png"
+              alt="imagen crear evento"
+              className="imagen-evento"
+            />
+          </a>
         </div>
       </div>
       <div className="contenedor">
@@ -35,11 +37,13 @@ export default function Menu() {
           <h2>Próximos Eventos</h2>
         </div>
         <div>
-          <img
-            src="../../../img/proximos eventos.png"
-            alt="ver eventos"
-            className="imagen-ver-eventos"
-          />
+          <a href="/events">
+            <img
+              src="../../../img/proximos eventos.png"
+              alt="ver eventos"
+              className="imagen-ver-eventos"
+            />
+          </a>
         </div>
       </div>
     </div>
