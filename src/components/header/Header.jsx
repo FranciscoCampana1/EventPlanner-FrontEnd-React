@@ -29,27 +29,13 @@ export default function Header() {
           <NavLink className="nav-link text-white" to="/">
             <img src="../../../img/img logo.png" alt="imagen-logo"  className="logo" />
           </NavLink>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              {isLoggedIn && !isAdmin && (
-                <NavLink className="nav-link" to="/events">
-                  Events
-                </NavLink>
-              )}
               {isAdmin && (
                 <NavLink className="nav-link" to="/admin">
                   Admin
                 </NavLink>
               )}
             </Nav>
-            {!isLoggedIn && (
-              <Nav>
-                <NavLink className="nav-link" to="/register">
-                  Registrarse
-                </NavLink>
-              </Nav>
-            )}
             {isLoggedIn && (
               <Nav>
                 <NavDropdown title={name} id="collasible-nav-dropdown">
@@ -62,7 +48,6 @@ export default function Header() {
                 </NavDropdown>
               </Nav>
             )}
-          </Navbar.Collapse>
         </Container>
       </Navbar>
     </div>
