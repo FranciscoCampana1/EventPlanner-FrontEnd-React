@@ -64,3 +64,57 @@ button:focus-visible {
 
 
 
+
+@media (max-width: 600px) {
+  h1{
+    padding-top: 1em;
+  }
+
+  body{
+    height: 100%;
+  }
+
+  table {
+    border: 0;
+  }
+
+
+  table thead {
+    border: none;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  table tr {
+    border-bottom: 3px solid #0c0c0c;
+    display: block;
+  }
+
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: 0.8em;
+    text-align: right;
+  }
+
+  tfoot tr{
+    border-bottom: none;
+  }
+
+  table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  table td:last-child {
+    border-bottom: 0;
+  }
+
+
+}
