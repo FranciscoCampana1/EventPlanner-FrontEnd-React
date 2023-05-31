@@ -1,6 +1,6 @@
 import React from "react";
 import {  Routes, Route } from "react-router-dom";
-import { Admin, Home, Events, Menu, Diary ,Register,UserProfile,PageNotFound} from './containers'
+import { Admin, Home, Events,EventCreate, Menu, Diary ,Register,UserProfile,PageNotFound} from './containers'
 
 
 export default function AppRouter() {
@@ -9,6 +9,7 @@ export default function AppRouter() {
       <Route path="/" element={<Home />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="/events" element={<Events />} />
+      <Route path="/event-create" element={<EventCreate />} />
       <Route path="/diary" element={<Diary />} />
       <Route path="/menu" element={<Menu />} />
       <Route path="/profile" element={<UserProfile />} />
