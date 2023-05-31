@@ -70,28 +70,42 @@ export default function Home() {
         <div className="title">
           <h1>Event Planner</h1>
         </div>
-        <img src="../../../img/adolescentes.jpg" alt="imagen adolescentes" className="imgAdolescentes"/>
+        <img
+          src="../../../img/adolescentes.jpg"
+          alt="imagen adolescentes"
+          className="imgAdolescentes"
+        />
       </div>
       <div className="login">
-        <form noValidate onSubmit={handleSubmit}>
-          <label htmlFor="">Email</label> <br />
-          <input
-            type="email"
-            name="email"
-            value={formValues.email}
-            onChange={handleChange}
-          />{" "}
-          <br />
-          <label htmlFor="">Password</label> <br />
-          <input
-            type="password"
-            name="password"
-            value={formValues.password}
-            onChange={handleChange}
-          />{" "}
-          <br />
-          <br />
-          <button className="button">Iniciar Sesión</button>
+        <form noValidate onSubmit={handleSubmit} className="form">
+          <div>
+            <label htmlFor="">Email</label>
+          </div>
+          <div>
+            <input
+              type="email"
+              name="email"
+              value={formValues.email}
+              onChange={handleChange}
+            />{" "}
+          </div>
+          <div>
+            <label htmlFor="">Password</label> <br />
+          </div>
+          <div>
+            <input
+              type="password"
+              name="password"
+              value={formValues.password}
+              onChange={handleChange}
+            />{" "}
+          </div>
+          <div>
+            <button className="button">Iniciar Sesión</button>
+          </div>
+          <div>
+            <a href="../register">Registrarme</a>
+          </div>
         </form>
         <br />
         {loginError && <p style={{ color: "red" }}>{loginError}</p>}
