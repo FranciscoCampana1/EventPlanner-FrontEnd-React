@@ -16,6 +16,8 @@ export default function Header() {
   const { name, role } = authState.userInfo;
   const isAdmin = role == "admin";
 
+  
+
   // handlers
   const handleLogout = () => {
     updateAuthStoreStateLogout();
@@ -26,7 +28,7 @@ export default function Header() {
     <div className="Header">
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <NavLink className="nav-link text-white" to="/">
+          <NavLink className="nav-link text-white" to="/menu" >
             <img src="../../../img/img logo.png" alt="imagen-logo"  className="logo" />
           </NavLink>
             <Nav className="me-auto">
