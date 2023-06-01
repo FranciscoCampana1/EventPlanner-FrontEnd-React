@@ -1,0 +1,11 @@
+.contenedor-eventos{
+    padding: 8em;
+    background-color: rgba(201, 224, 86, 0.952);
+    ;
+}
+
+@media (max-width: 600px) {
+    .contenedor-eventos{
+        padding: 0;
+    }
+}
