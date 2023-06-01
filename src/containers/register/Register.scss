@@ -1,7 +1,7 @@
 .contenedor-form{
     background-repeat: no-repeat;
     background-size: 100vw;
-    background-image: url(../../../img/img\ tablon.jpeg);
+    background-color: rgba(201, 224, 86, 0.952);
     display: flex;
     justify-content: center;
     padding: 2em;
@@ -9,13 +9,14 @@
 
     .form{
         width: 40vw;
-        background-color: rgba(240, 248, 255, 0.649);
+        background-color: rgb(33,37,41);
         padding: 2em;
         box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;;
         border-radius: 10px 10px;
         text-align: left;
         display: flex;
         flex-direction: column;
+        color: white;
 
     }
     .button{
@@ -23,4 +24,11 @@
         align-self: center;
     }
 
+}
+@media (max-width: 600px) {
+    .contenedor-form{
+        .form{
+            width: 90vw;
+        }
+    }
 }

@@ -39,3 +39,27 @@
        }
     }
 }
+
+@media (max-width: 600px) {
+    .contenedor-login{
+        display: block;
+        height: 100vh;
+        .imgHome{
+            margin-bottom: 0;
+            .title{
+            margin-bottom: 0em;
+            font-size: 1em;
+            padding: 10px;
+            h1{
+                padding: 0;
+            }
+            }
+        }
+        .imgAdolescentes{
+            width: 350px;
+            box-shadow: 2px 2px;
+        }
+        .form{
+        }
+    }
+}
