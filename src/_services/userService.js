@@ -13,4 +13,19 @@ userService.getAllUsers = async (token, page = 1) => {
     .data;
 };
 
+userService.getMyContacts = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  return (await axios.get(global.BASE_URL + `/api/users/get-my-contacts`, config))
+    .data;
+};
+
+
+
+  
+  
+
 export default userService;
