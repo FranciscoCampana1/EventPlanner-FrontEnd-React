@@ -1,19 +1,49 @@
 .menu {
     display:  flex;
     justify-content: space-around;
+    background-color: gray;
 
     .contenedor{
         width: 33.3vw;
         padding-bottom: 5em;
         padding-top: 5em;
         .imagen-contactos{
-            width: 380px;
+            width: 300px;
+            border-radius: 30px 30px;
+            box-shadow: 5px 5px;
         }
         .imagen-evento{
             width: 300px;
+            border-radius: 10px 10px;
+            box-shadow: 5px 5px;
         }
         .imagen-ver-eventos{
             width: 400px;
+            border-radius: 10px 10px ;
+            box-shadow: 5px 5px;
         }
     }
+}
+
+@media (max-width: 600px) {
+    .menu{
+        display: block;
+        .contenedor{
+        padding:1em;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        .imagen-contactos{
+            width: 90vw ;
+        }
+        .imagen-evento{
+            width: 90vw ;
+        }
+        .imagen-ver-eventos{
+            width: 90vw ;
+        }
+    }
+    }
+    
 }

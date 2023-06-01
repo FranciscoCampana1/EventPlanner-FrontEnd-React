@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Menu.scss";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Menu() {
+
+  const authState = useSelector((state) => state.auth);
+  const isLoggedIn = authState.isLoggedIn;
+  const navigate = useNavigate()
+
+
+  useEffect(() => {
+    if (isLoggedIn ) {
+      navigate('/menu')
+    } else {
+      navigate('/')
+    }
+  }, []);
+
   return (
     <div className="menu">
       <div className="contenedor">
@@ -11,7 +27,7 @@ export default function Menu() {
         <div>
           <a href="/diary">
             <img
-              src="../../../img/Sin título.png"
+              src="../../../img/Sin título.jpg"
               alt="ir a contactos"
               className="imagen-contactos"
             />
