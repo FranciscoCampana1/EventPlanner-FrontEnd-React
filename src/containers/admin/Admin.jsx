@@ -24,7 +24,7 @@ export default function Admin() {
       } else {
         navigate("/");
       }
-    }, []);
+    }, [usersPage]);
 
     const handleUsersList = (e) => {
       const { page, dataId } = e.currentTarget.dataset;
