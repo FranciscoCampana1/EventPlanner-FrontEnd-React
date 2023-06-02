@@ -64,6 +64,20 @@ eventService.getEvents = async (token) => {
       .data;
   }
 
+  eventService.addGuest = async (token, data, event) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    
+  const body = {
+    user_id: data
+  }
+    return (await axios.post(global.BASE_URL + `/api/event/add-guests/${event}`,body, config))
+      .data;
+  };
+
 
   eventService.deleteInvitation = async (token, event) => {
     const config = {
