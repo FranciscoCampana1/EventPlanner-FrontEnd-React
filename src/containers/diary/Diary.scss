@@ -1,6 +1,30 @@
 .contenedor-agenda{
     padding: 8em;
     background-color: rgba(201, 224, 86, 0.952);
+    height: 70vh;
+    display: flex;
+    flex-direction: column ;
+    justify-content: center;
+    gap: 1em;
+    .buttons{
+        display: flex;
+        gap: 2em;
+        padding-left: 4em;
+        button{
+            width: 10em;
+        }
+        .buttonAñadir{
+            background-color: rgb(13,110,253);
+            color: white;
+        }
+        .buttonCancelar{
+            background-color: red;
+            color: white;
+        }
+    }
+    .contenedor-form-add-contact{
+        align-self: center;
+    }
 }
 
 @media (max-width: 600px) {
