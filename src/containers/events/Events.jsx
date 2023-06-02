@@ -4,18 +4,24 @@ import { DataListTable } from "../../components";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import eventService from "../../_services/eventService";
-import "./Events.scss";
+import userService from "../../_services/userService";
 
+import "./Events.scss";
 
 export default function Events() {
   const authState = useSelector((state) => state.auth);
   const [events, setEvent] = useState([]);
+  const [viewEvents, setViewEvents] = useState(true);
   const [idEvent, setIdEvent] = useState();
   const [formValues, setFormValues] = useState({});
   const [optionsButton, setOptionsButton] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
-  const organizador = authState.userInfo.id
+  const [users, setUsers] = useState([]);
+  const [idUser, setIdUser] = useState();
+  const [isAddGuest, setIsAddGuest] = useState(false);
+  const [clickContact, setClickContact] = useState(false);
+  const organizador = authState.userInfo.id;
 
   useEffect(() => {
     getEvents(authState.userToken);
@@ -23,7 +29,7 @@ export default function Events() {
 
   const handleEvent = (e) => {
     const { dataId } = e.currentTarget.dataset;
-   const id_admin = e.currentTarget.lastChild.innerText
+    const id_admin = e.currentTarget.lastChild.innerText;
     if (id_admin == organizador) {
       setIdEvent(dataId);
       setOptionsButton(true);
@@ -31,16 +37,39 @@ export default function Events() {
       setIsDelete(false);
     }
   };
+  const handleContact = (e) => {
+    const { dataId } = e.currentTarget.dataset;
+    setIdUser(dataId);
+    setClickContact(true);
+  };
+
+  const handlePushContact = (e) => {
+    addGuest(authState.userToken, idUser, idEvent);
+    setViewEvents(true)
+    setIsAddGuest(false)
+    setClickContact(false)
+  };
 
   const handleUpdate = () => {
     setIsUpdate(true);
     setIsDelete(false);
-    setOptionsButton(false)
+    setIsAddGuest(false);
+    setOptionsButton(false);
   };
   const handleDelete = () => {
     setIsDelete(true);
     setIsUpdate(false);
-    setOptionsButton(false)
+    setIsAddGuest(false);
+    setOptionsButton(false);
+  };
+
+  const handleAddGuest = () => {
+    setIsDelete(false);
+    setIsUpdate(false);
+    setIsAddGuest(true);
+    setOptionsButton(false);
+    setViewEvents(false);
+    getMyContacts(authState.userToken);
   };
 
   const handleChange = (e) => {
@@ -51,21 +80,23 @@ export default function Events() {
     });
   };
 
-  const handleSubmitUpdate = (e) => {
-      updateEvent(authState.userToken, formValues, idEvent);
-    };
+  const handleSubmitUpdate = () => {
+    updateEvent(authState.userToken, formValues, idEvent);
+  };
 
-  const handleSubmitDelete = (e) => {
-    deleteEvent(authState.userToken, idEvent)
-    getEvents(authState.userToken)
-    };
-
-    
-    
-  const handleHideForm = () =>{
-    setIsUpdate(false)
+  const handleSubmitDelete = () => {
+    deleteEvent(authState.userToken, idEvent);
     setIsDelete(false)
-  }
+    getEvents(authState.userToken);
+  };
+
+  const handleHideForm = () => {
+    setIsUpdate(false);
+    setIsDelete(false);
+    setViewEvents(true);
+    setIsAddGuest(false);
+    setClickContact(false);
+  };
 
   const getEvents = async (token) => {
     try {
@@ -76,6 +107,21 @@ export default function Events() {
     }
   };
 
+  const addGuest = async (token, data, event) => {
+    try {
+      const response = await eventService.addGuest(token, data, event);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getMyContacts = async (token) => {
+    try {
+      const response = await userService.getMyContacts(token);
+      setUsers(response.Contacts);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const updateEvent = async (token, data, event) => {
     try {
       const response = await eventService.updateEvent(token, data, event);
@@ -91,13 +137,23 @@ export default function Events() {
     }
   };
 
+  const newContact = (users) =>
+    users.map((user) => {
+      user.id = user.Contact.user_id;
+      user.name = user.Contact.User.name;
+      user.surname = user.Contact.User.surname;
+      user.email = user.Contact.User.email;
+      user.phone = user.Contact.User.phone;
+      return user;
+    });
+
   const newEvent = (events) =>
     events.map((event) => {
       event.id = event.Event.id;
       event.title = event.Event.title;
       event.description = event.Event.description;
       event.date = event.Event.date;
-      event.id_admin = event.Event.id_admin
+      event.id_admin = event.Event.id_admin;
       event.time = event.Event.time;
       event.users = event.Event.Users.map((user) => {
         return user.name + " " + user.surname + ", ";
@@ -105,27 +161,107 @@ export default function Events() {
 
       return event;
     });
+
   return (
     <div>
       <div className="contenedor-eventos">
-        <DataListTable
-          data={newEvent(events)}
-          title="Tus Eventos"
-          headers={["Título", "Descripción", "Día", "Hora", "Asistirán","Organizador"]}
-          attributes={["title", "description", "date", "time", "users", "id_admin"]}
-          onChange={handleEvent}
-        />
+        {viewEvents && (
+          <DataListTable
+            data={newEvent(events)}
+            title="Tus Eventos"
+            headers={[
+              "Identificador del Evento",
+              "Título",
+              "Descripción",
+              "Día",
+              "Hora",
+              "Asistirán",
+              "Credencial del Organizador",
+            ]}
+            attributes={[
+              "id",
+              "title",
+              "description",
+              "date",
+              "time",
+              "users",
+              "id_admin",
+            ]}
+            onChange={handleEvent}
+          />
+        )}
+
+        {isAddGuest && (
+          <>
+            <h3>Clickea que invitado deseas agregar</h3>
+
+            <div className="container">
+              <DataListTable
+                data={newContact(users)}
+                title="Contacts"
+                headers={[
+                  "Contacto",
+                  "Nombre",
+                  "Apellidos",
+                  "Email",
+                  "Telefono",
+                ]}
+                attributes={["id", "name", "surname", "email", "phone"]}
+                onChange={handleContact}
+              />
+              {clickContact && (
+                <>
+                  <h3>Agregar contacto Nº {idUser} </h3>
+                  <div>
+                    <Button
+                      variant="warning"
+                      onClick={handlePushContact}
+                      className="button"
+                    >
+                      Agregar contacto
+                    </Button>
+                    <Button
+                      variant="primary"
+                      className="button"
+                      onClick={handleHideForm}
+                    >
+                      Volver atrás
+                    </Button>
+                  </div>
+                </>
+              )}
+            </div>
+          </>
+        )}
         {optionsButton && (
           <>
-            <button onClick={handleUpdate}> Modificar evento</button>
-            <button onClick={handleDelete}> Eliminar evento</button>
+            <h3>Evento Nº {idEvent} </h3>
+
+            <div className="contenedor-botones">
+              <button onClick={handleAddGuest} className="buttonConservar">
+                {" "}
+                Añadir invitado
+              </button>
+              <button onClick={handleUpdate} className="buttonModificar">
+                {" "}
+                Modificar evento
+              </button>
+              <button onClick={handleDelete} className="buttonEliminar">
+                {" "}
+                Eliminar evento
+              </button>
+            </div>
           </>
         )}
 
         {isUpdate && (
           <>
-            <h3>Estas cambiando el evento {idEvent} </h3>
-            <Form noValidate onSubmit={handleSubmitUpdate} className="form">
+            <h3>Modificar evento {idEvent} </h3>
+            <Form
+              noValidate
+              onSubmit={handleSubmitUpdate}
+              className="form-modificar-evento"
+            >
               <Form.Group className="mb-3  rounded p-4 inputForm">
                 <Form.Label>Título</Form.Label>
                 <Form.Control
@@ -190,10 +326,14 @@ export default function Events() {
                   />
                 </Form.Group>
               </Form.Group>
-              <Button variant="warning" type="submit" className="button" >
+              <Button variant="warning" type="submit" className="button">
                 Modificar evento
               </Button>
-              <Button variant="primary" className="button" onClick={handleHideForm}>
+              <Button
+                variant="primary"
+                className="button"
+                onClick={handleHideForm}
+              >
                 No modificar
               </Button>
             </Form>
@@ -202,9 +342,17 @@ export default function Events() {
 
         {isDelete && (
           <>
-            <h3>Estas por eliminar el evento {idEvent}</h3>
-            <button onClick={handleSubmitDelete}> Eliminar evento</button>
-            <button onClick={handleHideForm}> Conservar evento</button>
+            <h3>Eliminar evento {idEvent}</h3>
+            <div className="contenedor-botones">
+              <button onClick={handleSubmitDelete} className="buttonEliminar">
+                {" "}
+                Eliminar evento
+              </button>
+              <button onClick={handleHideForm} className="buttonConservar">
+                {" "}
+                Conservar evento
+              </button>
+            </div>
           </>
         )}
       </div>
