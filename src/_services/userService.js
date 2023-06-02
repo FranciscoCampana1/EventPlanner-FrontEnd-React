@@ -19,11 +19,25 @@ userService.getMyContacts = async (token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  return (await axios.get(global.BASE_URL + `/api/users/get-my-contacts`, config))
+
+  return (await axios.get(global.BASE_URL + `/api/users/get-my-contacts` ,config))
     .data;
 };
 
 
+userService.addContact = async (token, data) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    
+  const body = {
+    phone: data.phone
+  }
+    return (await axios.post(global.BASE_URL + `/api/users/create-contact`,body, config))
+      .data;
+  };
 
   
   
