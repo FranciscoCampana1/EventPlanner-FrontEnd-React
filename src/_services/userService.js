@@ -24,6 +24,17 @@ userService.getMyContacts = async (token) => {
     .data;
 };
 
+userService.getProfile = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  return (await axios.get(global.BASE_URL + `/api/users/get-profile` ,config))
+    .data;
+};
+
 
 userService.addContact = async (token, data) => {
     const config = {
