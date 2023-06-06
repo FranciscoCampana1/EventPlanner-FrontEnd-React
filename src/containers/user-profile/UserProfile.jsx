@@ -35,7 +35,7 @@ export default function UserProfile() {
   return (
     <div className="background">
       <div className="contenedor-perfil">
-        <Card style={{ width: "18rem" }}>
+        <Card className="carta">
           <Card.Img variant="top" src="../../../img/imagen-perfil.png" />
           <Card.Body>
             <Card.Title>Nombre: {user.name}</Card.Title>
