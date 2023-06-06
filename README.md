@@ -1,46 +1,48 @@
 # Event Planner
 
-## Table of Contents
+Este proyecto consiste en una página web front end conectada a una API creada en un proyecto previo para la gestión de un organizador de eventos.
 
-- [About](#about)
-- [Getting Started](#getting_started)
-- [Usage](#usage)
-- [Contributing](../CONTRIBUTING.md)
+### Instalación:
 
-## About <a name = "about"></a>
+- Clonar el repositorio: git clone https://github.com/FranciscoCampana1/EventPlanner-FrontEnd-React
+- Instalar las dependencias: npm install
+- Iniciar el servidor de desarrollo: npm run dev
 
-Write about 1-2 paragraphs describing the purpose of your project.
+### Cómo usar el proyecto.
 
-## Getting Started <a name = "getting_started"></a>
+Navegar a la url en el navegador.
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+- Hacer clic en el botón "Iniciar sesión".
+- Introducir las credenciales de usuario.
+- Explorar las diferentes secciones de la aplicación.
 
-### Prerequisites
+### Imagenes
 
-What things you need to install the software and how to install them.
+ A continuación se pueden ver imagenes del proyecto en pantallas small hasta extra large. 
 
-```
-Give examples
-```
+<img src="./img/home-login.png" alt="vista home" />
 
-### Installing
+<img src="./img/eventos-tablet.png" alt="eventos" />
 
-A step by step series of examples that tell you how to get a development env running.
+<img src="./img/contactos-tablet.png" alt="eventos" />
 
-Say what the step will be
+<img src="./img/menu-movil.png" alt=" meunu movil" />
 
-```
-Give the example
-```
+<img src="./img/perfil-movil.png" alt=" perfil movil" />
 
-And repeat
 
-```
-until finished
-```
+### Nuevas Funcionalidades
 
-End with an example of getting some data out of the system or using it for a little demo.
+Los usuarios van a poder modificar su perfil
 
-## Usage <a name = "usage"></a>
+### Deploy
 
-Add notes about how to use the system.
+- React
+- HTML
+- CSS
+- JavaScript
+
+### Contacto
+
+**_Francisco Campana_**  
+<a href="https://github.com/FranciscoCampana1" target="_blank"><img src="https://img.shields.io/badge/github-24292F?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a>
