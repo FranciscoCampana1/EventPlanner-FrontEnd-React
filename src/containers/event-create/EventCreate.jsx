@@ -20,13 +20,14 @@ export default function EventCreate() {
     setFormValues({
       ...formValues,
       [name]: value,
+      id_admin: authState.userInfo.id
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     createEvent(authState.userToken ,formValues);
-    navigate("/events");
+    navigate("/menu");
   };
 
   const createEvent = async (token, body) => {
