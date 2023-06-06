@@ -1,0 +1,17 @@
+.background{
+    width: 100vw;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .contenedor-perfil{
+        width: 40vw;
+        height: 60vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        button{
+            margin-top: 1em;
+        }
+}
+}
