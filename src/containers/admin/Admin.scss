@@ -1,3 +1,17 @@
 .contenedor-admin{
     padding: 3em;
+    background-color: rgba(201, 224, 86, 0.952);
+}
+
+@media(min-width: 600px ){
+    .contenedor-admin{
+        padding: 5em;
+        padding-top: 9em;
+        padding-bottom: 9em;
+    }
+}
+@media(max-width: 600px ){
+    .contenedor-admin{
+        padding: 1em;
+    }
 }

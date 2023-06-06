@@ -31,7 +31,7 @@ export default function Header() {
           <NavLink className="nav-link text-white" to="/menu" >
             <img src="../../../img/img logo.png" alt="imagen-logo"  className="logo" />
           </NavLink>
-            <Nav className="me-auto">
+            <Nav className="me-auto header-admin">
               {isAdmin && (
                 <NavLink className="nav-link" to="/admin">
                   Admin
