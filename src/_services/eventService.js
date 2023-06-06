@@ -86,7 +86,7 @@ eventService.getEvents = async (token) => {
         },
     }
   
-    return (await axios.post(global.BASE_URL + `/api/event/delete-invitation/${event}`, config))
+    return (await axios.delete(global.BASE_URL + `/api/event/delete-invitation/${event}`, config))
       .data;
   }
 
