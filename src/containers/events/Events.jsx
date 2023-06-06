@@ -5,8 +5,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import eventService from "../../_services/eventService";
 import userService from "../../_services/userService";
-
 import "./Events.scss";
+import { useNavigate } from "react-router-dom";
 
 export default function Events() {
   const authState = useSelector((state) => state.auth);
@@ -15,6 +15,7 @@ export default function Events() {
   const [idEvent, setIdEvent] = useState();
   const [formValues, setFormValues] = useState({});
   const [optionsButton, setOptionsButton] = useState(false);
+  const [isDeleteInvitation, setIsDeleteInvitation] = useState(false)
   const [isUpdate, setIsUpdate] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const [users, setUsers] = useState([]);
@@ -22,10 +23,13 @@ export default function Events() {
   const [isAddGuest, setIsAddGuest] = useState(false);
   const [clickContact, setClickContact] = useState(false);
   const organizador = authState.userInfo.id;
+  const navigate = useNavigate()
 
   useEffect(() => {
     getEvents(authState.userToken);
   }, [events]);
+
+  //handle, capta el evento si es admin puede modificar el evento si es invitado puede eliminar invitación
 
   const handleEvent = (e) => {
     const { dataId } = e.currentTarget.dataset;
@@ -35,6 +39,12 @@ export default function Events() {
       setOptionsButton(true);
       setIsUpdate(false);
       setIsDelete(false);
+      setIsDeleteInvitation(false)
+    } else {
+      setIdEvent(dataId)
+      setIsDeleteInvitation(true)
+      setOptionsButton(false);
+
     }
   };
   const handleContact = (e) => {
@@ -88,7 +98,14 @@ export default function Events() {
     deleteEvent(authState.userToken, idEvent);
     setIsDelete(false)
     getEvents(authState.userToken);
+    navigate('/menu')
   };
+
+  const handleDeleteInvitation = () => {
+    deleteInvitation( authState.userToken, idEvent)
+    setIsDeleteInvitation(false)
+    navigate('/menu')
+  }
 
   const handleHideForm = () => {
     setIsUpdate(false);
@@ -96,6 +113,7 @@ export default function Events() {
     setViewEvents(true);
     setIsAddGuest(false);
     setClickContact(false);
+    setIsDeleteInvitation(false)
   };
 
   const getEvents = async (token) => {
@@ -132,6 +150,13 @@ export default function Events() {
   const deleteEvent = async (token, event) => {
     try {
       const response = await eventService.deleteEvent(token, event);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const deleteInvitation = async (token, event) => {
+    try {
+      const response = await eventService.deleteInvitation(token, event);
     } catch (error) {
       console.log(error);
     }
@@ -212,13 +237,13 @@ export default function Events() {
               {clickContact && (
                 <>
                   <h3>Agregar contacto Nº {idUser} </h3>
-                  <div>
+                  <div className="contenedor-botones">
                     <Button
                       variant="warning"
                       onClick={handlePushContact}
                       className="button"
                     >
-                      Agregar contacto
+                      Agregar invitado
                     </Button>
                     <Button
                       variant="primary"
@@ -256,7 +281,7 @@ export default function Events() {
 
         {isUpdate && (
           <>
-            <h3>Modificar evento {idEvent} </h3>
+            <h3>Modificar evento Nº {idEvent} </h3>
             <Form
               noValidate
               onSubmit={handleSubmitUpdate}
@@ -326,7 +351,8 @@ export default function Events() {
                   />
                 </Form.Group>
               </Form.Group>
-              <Button variant="warning" type="submit" className="button">
+              <div className="contenedor-botones">
+                <Button variant="warning" type="submit" className="button">
                 Modificar evento
               </Button>
               <Button
@@ -336,6 +362,8 @@ export default function Events() {
               >
                 No modificar
               </Button>
+              </div>
+              
             </Form>
           </>
         )}
@@ -351,6 +379,21 @@ export default function Events() {
               <button onClick={handleHideForm} className="buttonConservar">
                 {" "}
                 Conservar evento
+              </button>
+            </div>
+          </>
+        )}
+        {isDeleteInvitation && (
+          <>
+            <h3>Eliminar Invitación del Evento Nº {idEvent}</h3>
+            <div className="contenedor-botones">
+              <button onClick={handleDeleteInvitation} className="buttonEliminar">
+                {" "}
+                Eliminar Invitación
+              </button>
+              <button onClick={handleHideForm} className="buttonConservar">
+                {" "}
+                Conservar Invitación
               </button>
             </div>
           </>

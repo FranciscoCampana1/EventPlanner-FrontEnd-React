@@ -1,5 +1,7 @@
 .contenedor-eventos{
-    padding: 10em;
+    padding: 2em;
+    padding-top: 18em;
+    padding-bottom: 18em;
     background-color: rgba(201, 224, 86, 0.952);
     display: flex;
     flex-direction: column;
@@ -8,6 +10,8 @@
 
     .contenedor-botones{
         display: flex;
+        justify-content: center;
+        margin-top: 1em;
         gap: 1em;
 
         .buttonEliminar{
@@ -46,6 +50,14 @@
 
 @media (max-width: 600px) {
     .contenedor-eventos{
-        padding: 0;
+        padding: 2em;
     }
+
+    .form-modificar-evento{
+        padding: 2em;
+        .contenedor-botones{
+            margin-left: 2.5em;
+        }
+    }
+    
 }
