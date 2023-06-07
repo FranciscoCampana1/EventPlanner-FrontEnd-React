@@ -1,28 +1,57 @@
 import React from "react";
-import './Register.scss'
+import "./Register.scss";
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import authService from "../../_services/authService";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
+import validator from "validator";
 
 export default function Register() {
   const [formValues, setFormValues] = useState({});
-  const navigate = useNavigate()
+  const [loginError, setLoginError] = useState(null);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({
       ...formValues,
-      [name]: value, 
+      [name]: value,
     });
   };
-  
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    registerUser(formValues);
-    navigate('/')
+    const values = {
+      name: formValues.name,
+      surname: formValues.surname,
+      email: formValues.email,
+      phone: formValues.phone,
+      password: formValues.password,
+    };
+
+    if (
+      validator.isAlpha(values.name) &&
+      validator.isAlpha(values.surname) &&
+      validator.isEmail(values.email) &&
+      validator.isMobilePhone(values.phone) &&
+      validator.isByteLength(values.password, { min: 8, max: undefined })
+    ) {
+      registerUser(values);
+      navigate("/");
+    } else if (!validator.isEmail(values.email)) {
+      setLoginError("Debes introducir un correo real");
+    } else if (!validator.isAlpha(values.name)) {
+      setLoginError("El apartado nombre solo puede contener letras");
+    } else if (!validator.isAlpha(values.surname)) {
+      setLoginError("El apartado apellido solo puede contener letras");
+    } else if ((!validator.isMobilePhone(values.phone))) {
+      setLoginError("Debe ser un movil real");
+    } else if (
+      !validator.isByteLength(values.password, { min: 8, max: undefined })
+    ) {
+      setLoginError("La contraseña debe contener mínimo 8 caracteres");
+    }
   };
 
   const registerUser = async (body) => {
@@ -36,6 +65,9 @@ export default function Register() {
   return (
     <>
       <div className="contenedor-form">
+        <div>
+          <h1>Registro</h1>
+        </div>
         <Form noValidate onSubmit={handleSubmit} className="form">
           <Form.Group className="mb-3  rounded p-4 inputForm">
             <Form.Label>Nombre</Form.Label>
@@ -79,13 +111,15 @@ export default function Register() {
               onChange={handleChange}
             />
           </Form.Group>
-          
-            <Button variant="primary" type="submit" className="button">
+
+          <Button variant="primary" type="submit" className="button">
             Crear perfil
           </Button>
-          
-          
         </Form>
+        <div>
+          <br />
+          {loginError && <p style={{ color: "red" }}>{loginError}</p>}
+        </div>
       </div>
     </>
   );
