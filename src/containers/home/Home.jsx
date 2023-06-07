@@ -54,7 +54,6 @@ export default function Home() {
   const login = async (credentials) => {
     try {
       const response = await authService.login(credentials);
-      console.log(response);
       const token = response.token;
       setLoginError(null);
       updateAuthStoreStateLogin(token);
