@@ -1,4 +1,9 @@
 .contenedor-form{
     padding-top: 7em !important;
     padding-bottom: 7em !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
 }
